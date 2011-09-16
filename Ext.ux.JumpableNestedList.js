@@ -1,8 +1,8 @@
 Ext.ux.JumpableNestedList = Ext.extend(Ext.NestedList, {
-    jumpToNode: function(nodeInfo,doSelect,hideActive) {
+    traceSelectionPath: true,
+	hideSelectionPath: true,
+	jumpToNode: function(nodeInfo,doSelect,hideActive) {
         var me = this,
-            hideActive = hideActive==undefined ? me.layout.hideActive : hideActive,
-            doSelect = doSelect==undefined ? false : doSelect,
             tree = me.store.tree,
             nodes = [],
             node = nodeInfo;
@@ -46,8 +46,8 @@ Ext.ux.JumpableNestedList = Ext.extend(Ext.NestedList, {
                 // add it to the nestedlist
                 nextlist = me.addNextCard(newlist.recordNode);
                 //me.layout.hideActive = true;
-                me.layout.setActiveItem(nextlist,"fade",true);
-                if(doSelect) {
+                me.layout.setActiveItem(nextlist,"fade",me.hideSelectionPath);
+                if(me.traceSelectionPath) {
                     // get the index of the list we just added
                     curridx = me.items.indexOf(nextlist);
                     // get the one before it
@@ -61,7 +61,7 @@ Ext.ux.JumpableNestedList = Ext.extend(Ext.NestedList, {
             // is a leaf; will probably want to fire onItemTap()
             else {
                 var idx = nextlist.store.find("id",tmpnode.id);
-                if(doSelect) {
+                if(me.traceSelectionPath) {
                     // should be the last added list
                     prevlist = me.items.getAt(curridx);
                     child = prevlist.getNode(tmpnode.getRecord())

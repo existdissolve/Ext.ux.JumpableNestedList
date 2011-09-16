@@ -1,0 +1,18 @@
+Ext.ux.JumpableNestedList allows you to arbitrarily navigate (or "jump") to any node that exists within a NestedList. The best part of it, though, is that it preserves the automated navigation of the NestedList, and even traces the selection path to the selected node, just as if you had arrived at the destination via the normal hierarchical navigation.
+
+Usage:
+
+var jns = new Ext.ux.JumpableNestedList({
+	// specifies whether or not to trace the 
+	// path in the hierarchy to the selected
+	// node
+	traceSelectionPath: true|false (d->true), 
+	// prevents momentary flicker of parent
+	// list when navigating to node
+	// (requires cardlayout override)
+	hideSelectionPath: true|false (d->true) 
+});
+
+Navigate to Node:
+
+jns.jumpToNode(mynode)
